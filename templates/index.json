@@ -1,50 +1,17 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>Bag the unique collections<\/strong>",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
-      "custom_css": [
-        "@media (min-width: 640px) {h2 {font-size: 72px; }}"
-      ],
-      "settings": {
-        "image": "shopify:\/\/shop_images\/apparel-1850804_1280.jpg",
-        "image_overlay_opacity": 50,
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "custom_css": [
         ".card__media {height: 100%; max-height: 450px;}"
       ],
@@ -73,10 +40,73 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "section_image_with_slider_gMprdx": {
+      "type": "section-image-with-slider",
+      "blocks": {
+        "testimonial_wXKtwK": {
+          "type": "testimonial",
+          "settings": {
+            "client_review": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “<\/p>",
+            "client_image": "shopify:\/\/shop_images\/Rectangle_8.png",
+            "client_name": "Mr. John Doe",
+            "client_position": "Client"
+          }
+        },
+        "testimonial_dpaDjR": {
+          "type": "testimonial",
+          "settings": {
+            "client_review": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “<\/p>",
+            "client_image": "shopify:\/\/shop_images\/Aryendra_Prakash_Singh.jpg",
+            "client_name": "Mr. John Doe",
+            "client_position": "Client"
+          }
+        },
+        "testimonial_cBVpeY": {
+          "type": "testimonial",
+          "settings": {
+            "client_review": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “<\/p>",
+            "client_image": "shopify:\/\/shop_images\/1_86583ec4-835c-45cd-999c-b7e8b1bdc86e.webp",
+            "client_name": "Mr. John Doe",
+            "client_position": "Client"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_wXKtwK",
+        "testimonial_dpaDjR",
+        "testimonial_cBVpeY"
+      ],
+      "settings": {
+        "card_preview_image": "shopify:\/\/shop_images\/Rectangle_14.png",
+        "image_with_slider_heading": "Testimonials",
+        "image_with_slider_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "slide_type": "slide",
+        "per_page": 3,
+        "display_arrows": true,
+        "display_dots": false,
+        "autoplay_slide": false,
+        "autoplay_duration": 3,
+        "background_color": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_newsletter_BKHhqJ": {
+      "type": "custom-newsletter",
+      "settings": {
+        "newsletter_heading": "Subscribe To Our Newsletter",
+        "background_color": "#efff82",
+        "form_action_url": "\/contact",
+        "button_text": "Subscribe",
+        "button_color": "#5d6b3e",
+        "button_text_color": "#ffffff"
+      }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "section_image_with_slider_gMprdx",
+    "custom_newsletter_BKHhqJ"
   ]
 }
