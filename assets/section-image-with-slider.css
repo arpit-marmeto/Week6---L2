@@ -57,13 +57,16 @@
 }
 
 .image-with-slider__card {
-    width: 100%; /* Full width on mobile */
+    width: 100%;
     padding: 15px;
     background-color: #f0f9e0;
     border-radius: 8px;
+    border: 1px solid #333;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 10px 0; /* Spacing between cards */
+    margin: 10px 0;
+    transition: background-color 0.3s ease; 
 }
+
 
 .image-with-slider__review {
     font-style: italic;
@@ -149,8 +152,10 @@
     }
 
     .image-with-slider__card {
-        width: 50%; /* Two cards per row */
+        max-width: 36.35%;
+        height: 35.625%;
         margin: 0 10px; /* Adjust spacing between cards */
+        transition: background-color 0.3s ease; /* Smooth transition for background change */
     }
 
     .image-with-slider__client-info {
@@ -167,71 +172,5 @@
 }
 
 
-/* 
 
 
-"blocks": [
-    {
-        "type": "testimonial",
-        "name": "Testimonial Card",
-        "settings": [
-            {
-                "type": "header",
-                "content": "Card Details"
-            },
-            {
-                "type": "image_picker",
-                "id": "card_preview_image",
-                "label": "Card Preview Image"
-            },
-            {
-                "type": "richtext",
-                "id": "client_review",
-                "label": "Client Review Text",
-                "default": "<p></p>"
-            },
-            {
-                "type": "image_picker",
-                "id": "client_image",
-                "label": "Client Image"
-            },
-            {
-                "type": "text",
-                "id": "client_name",
-                "label": "Enter Client Name",
-                "default": "Mr. John Doe"
-            },
-            {
-                "type": "text",
-                "id": "client_position",
-                "label": "Enter Client Position",
-                "default": "Client"
-            }
-        ]
-    }
-], */
-/* 
-
-{% for block in section.blocks %}
-<li class="splide__slide image-with-slider__card">
-    <div class="image-with-slider__review">
-        <p>{{block.settings.client_review}}</p>
-    </div>
-    <div class="image-with-slider__client-info">
-        <div class="image-with-slider__client-image">
-            {%- if block.settings.client_image != blank -%}
-                {% render 'responsive-picture',
-                  desktopImage: block.settings.client_image,
-                  img-class: 'image-with-slider__client-image-img'
-                %}
-              {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag }}
-              {%- endif -%}
-        </div>
-        <div class="image-with-slider__client-details">
-            <h3 class="image-with-slider__client-name">{{block.settings.client_name}}</h3>
-            <p class="image-with-slider__client-position">{{block.settings.client_position}}</p>
-        </div>
-    </div>
-</li>
-{% endfor %} */
