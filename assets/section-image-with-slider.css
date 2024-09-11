@@ -43,6 +43,7 @@
 }
 
 .image-with-slider__description {
+    max-width: 95%;
     font-size: 14px;
     color: #666;
     margin-bottom: 10px;
@@ -53,14 +54,14 @@
 }
 
 .splide__slide {
-    width: 100%; /* Full width on mobile */
+    width: 100%;
 }
 
 .image-with-slider__card {
     width: 100%;
     padding: 15px;
-    background-color: #f0f9e0;
-    border-radius: 8px;
+    background-color: #fff;
+    border-radius: 4px;
     border: 1px solid #333;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
@@ -69,15 +70,15 @@
 
 
 .image-with-slider__review {
+    font-weight: bold;
     font-style: italic;
     color: #333;
-    text-align: center; /* Center-align review text on mobile */
 }
 
 .image-with-slider__client-info {
     display: flex;
     align-items: center;
-    justify-content: center;
+
     margin-top: 15px;
 }
 
@@ -86,7 +87,7 @@
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 10px;
+    margin: 10px;
 }
 
 .image-with-slider__client-image-img {
@@ -96,28 +97,56 @@
 }
 
 .image-with-slider__client-details {
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
-    text-align: center; /* Center-align client details on mobile */
 }
 
 .image-with-slider__client-name {
-    font-weight: bold;
+    font-size: 22px;
 }
 
 .image-with-slider__client-position {
+    margin-top: -20px;
     color: #888;
 }
 
-/* Desktop: Adjust layout for larger screens */
+.splide__pagination{
+    position: relative;
+    margin-top: 20px;
+}
+
+.splide__pagination__page.is-active {
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #5C6E4A;
+    margin: 0px 15px 0px 15px;
+}
+
+.splide__pagination__page {
+    width: 15px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #D0D0C9;
+}
+
+.image-with-slider__card.is-active{
+    background-color: #F6FFC2;
+}
+
+.splide__arrows{
+    display: none;
+}
+
+
 @media (min-width: 768px) {
     .image-with-slider {
-        flex-direction: row; /* Flex-row on desktop */
+        flex-direction: row; 
         padding: 36px;
     }
 
     .image-with-slider__container {
-        flex-direction: row; /* Side-by-side layout on desktop */
+        flex-direction: row; 
         align-items: center;
     }
 
@@ -152,7 +181,7 @@
     }
 
     .image-with-slider__card {
-        max-width: 36.35%;
+        max-width: 50%;
         height: 35.625%;
         margin: 0 10px; /* Adjust spacing between cards */
         transition: background-color 0.3s ease; /* Smooth transition for background change */
