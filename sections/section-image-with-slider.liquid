@@ -1,7 +1,7 @@
 {{ 'section-image-with-slider.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'section-image-with-slider.js' | asset_url }}" defer></script> 
 
-<section class="image-with-slider page-width">
+<section class="image-with-slider">
     <div class="image-with-slider__container">
         <div class="image-with-slider__image">
             {%- if section.settings.card_preview_image != blank -%}
