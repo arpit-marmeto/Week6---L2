@@ -1,0 +1,116 @@
+.brand-usp {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row by default (for mobile devices) */
+    gap: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    height: 296px;
+    width: 396px; 
+  }
+  
+  /* Individual items - Mobile first */
+  .brand-usp__item {
+    display: flex;
+    flex-direction: column; /* Stacked vertically for mobile */
+    text-align: center;
+    align-items: center;
+    width: 100%; /* Full width for mobile */
+    gap: 10px;
+  }
+  
+  
+  /* Logo image with responsive size - Mobile first */
+  .brand-usp__image {
+    width: 40px; /* Smaller image for mobile */
+    height: 40px;
+    object-fit: contain;
+  }
+  
+  /* Heading styles - Mobile first */
+  .brand-usp__heading {
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 10px;
+  }
+  
+  /* Description styles - Mobile first */
+  .brand-usp__description {
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #5B5B5B;
+  }
+  
+  /* Tablet screen styles */
+  @media (min-width: 481px) {
+    .brand-usp {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row for tablets */
+        gap: 16px;
+        padding: 25px 68px 25px 68px;
+        width: 100%; /* Ensure it adjusts to the tablet screen size */
+        height: auto; 
+    }
+  
+    .brand-usp__item {
+      flex-direction: row; /* Switch back to horizontal layout */
+      text-align: left;
+      align-items: center;
+      width: 100%;
+      height: 68px;
+      gap: 16px;
+    }
+  
+    .brand-usp__image {
+      width: 56px; /* Larger image size for tablets */
+      height: 56px;
+    }
+  
+    .brand-usp__heading {
+      font-size: 16px;
+    }
+  
+    .brand-usp__description {
+      font-size: 12px;
+    }
+  }
+  
+  /* Desktop and large tablet screens */
+  @media (min-width: 769px) {
+    .brand-usp {
+        grid-template-columns: repeat(3, 1fr); 
+        max-width: 1440px; /* Set a max width for larger screens */
+        height: auto; /* Allow height to adjust dynamically */
+    }
+  
+    .brand-usp__heading {
+      font-size: 18px;
+    }
+  
+    .brand-usp__description {
+      font-size: 14px;
+    }
+  }
+  
+  /* Large desktop screens */
+  @media (min-width: 1025px) {
+    .brand-usp {
+        grid-template-columns: repeat(4, 1fr); /* 4 items per row for large screens */
+        max-width: 1440px; /* Set maximum width for large screens */
+        height: auto; /* Height adjusts dynamically based on content */
+    }
+  
+    .brand-usp__item {
+      width: 320px; /* Adjust width for large screens */
+    }
+  
+    .brand-usp__heading {
+      font-size: 24px;
+    }
+  
+    .brand-usp__description {
+      font-size: 16px;
+    }
+  }
+  

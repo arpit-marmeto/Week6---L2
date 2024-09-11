@@ -1,0 +1,263 @@
+{{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'shop-the-look.js' | asset_url }}" defer></script>
+
+{% capture splide_options %}
+    {
+        "type": "{{ section.settings.slide_type }}",
+        "perPage": 1,
+        "pagination": {{ section.settings.display_dots }},
+        "autoplay": {{ section.settings.autoplay_slide }},
+        "interval": {{ section.settings.autoplay_duration }},
+        "arrows": {{ section.settings.display_arrows }},
+        "breakpoints": {
+            "990": {
+                "drag": true
+            },
+            "989": {
+                "drag": false
+            }
+        }
+    }
+    
+{% endcapture %}
+
+
+<div class="shop-the-look__wrapper">
+  
+    
+    <div class="shop-the-look__responsive_wrapper page-width bg-color--{{ section.id }} section-{{ section.id }}-padding isolate">
+       
+        
+        <div class="shop-the-look__header">
+            <h2>{{ section.settings.section_title }}</h2>
+            <!-- Section header displaying the title set in the settings -->
+        </div>
+        
+        <div class="shop-the-look__content">
+            <!-- Content container for the media and product sections -->
+            
+            <div class="shop-the-look__media isolate">
+                <!-- Container for the image and hotspots -->
+                
+                {% render 'responsive-picture'
+                    desktopImage: section.settings.desktop_image,
+                    mobileImage: section.settings.mobile_image,
+                    img-class: 'w-full'
+                %}
+                <!-- Rendering the responsive image using the 'responsive-picture' snippet with desktop and mobile images -->
+                
+                {% for block in section.blocks %}
+                <button class="shop-the-look__media-hotspots" style="top: {{ block.settings.position_from_top }}%; left: {{ block.settings.position_from_left }}%" data-i={{ forloop.index0 }}></button>
+                <!-- Loop through each block to create hotspot buttons positioned dynamically based on settings -->
+                {% endfor %}
+            </div>
+            
+            <div class="shop-the-look__product-wrapper">
+                <!-- Wrapper for the product carousel -->
+                
+                <splider-component class="splide splide-component" data-options='{{ splide_options }}'>
+                    <!-- Custom web component for the Splide carousel, passing in the options as a data attribute -->
+                    
+                    <div class="splide__arrows splide__arrows--ltr buttons-container">
+                        <!-- Arrows for navigating the Splide carousel -->
+                        
+                        <button class="splide__arrow splide__arrow--prev previous-button" type="button" aria-label="Previous slide" aria-controls="splide01-track">
+                            <svg class="chevron--right" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                <path d="M9 18.7913L15 12.7913L9 6.79126" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <!-- Previous arrow button with an SVG icon -->
+                        
+                        <button class="splide__arrow splide__arrow--next next-button" type="button" aria-label="Next slide" aria-controls="splide01-track">
+                            <svg class="chevron--right" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                <path d="M9 18.7913L15 12.7913L9 6.79126" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <!-- Next arrow button with an SVG icon -->
+                    </div>
+                    
+                    <div class="splide__track">
+                        <!-- Track container for the slides in the Splide carousel -->
+                        
+                        <ul class="splide__list shop-the-look__product-card-wrapper">
+                            <!-- List container for the product cards -->
+                            
+                            {% for block in section.blocks %}
+                            <li class="splide__slide shop-the-look__product-card">
+                                <!-- Individual slide for each product -->
+                                
+                                <div class="isolate">
+                                    <!-- Isolated container for the product image and tags -->
+                                    
+                                    <a target="_blank" href="{{ block.settings.product.url }}">
+                                        {% render 'responsive-picture'
+                                            desktopImage: block.settings.product.featured_image,
+                                            img-class: 'w-full'
+                                        %}
+                                        <!-- Rendering the product image using the 'responsive-picture' snippet -->
+                                        
+                                        {% for tag in block.settings.product.tags %}
+                                        {% if tag == "On sale" %}
+                                        <span class='tag'>{{ tag }}</span>
+                                        <!-- Displaying the "On sale" tag if it exists -->
+                                        {% endif %}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                
+                                <div class="shop-the-look__product-info">
+                                    <!-- Container for the product title and price -->
+                                    
+                                    {% if block.settings.product.title != blank %}
+                                    <h3>{{ block.settings.product.title }}</h3>
+                                    <!-- Display the product title if it's not blank -->
+                                    {% endif %}
+                                    
+                                    {% if block.settings.product.price != blank %}
+                                    <p class="{% if block.settings.product.compare_at_price %}if-compare-at-price{% endif %}">
+                                        {% if block.settings.product.compare_at_price %}
+                                        {% else %}From {% endif %} {{ block.settings.product.price | money_with_currency }}
+                                        <!-- Display the product price, with "From" if there's no compare at price -->
+                                        
+                                        {% if block.settings.product.compare_at_price != blank %}
+                                        <span class="line-through">{{ block.settings.product.compare_at_price | money_with_currency }}</span>
+                                        <!-- Display the compare at price with a line-through style if it's not blank -->
+                                        {% endif %}
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </splider-component>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "shop the look",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+        {
+            "type": "richtext",
+            "label": "Section Title",
+            "id": "section_title"
+        },
+        {
+            "type": "header",
+            "content": "Image options"
+        },
+        {
+            "type": "image_picker",
+            "label": "Desktop image",
+            "id": "desktop_image",
+            "info": "Recommended size: 750 x 500px"
+        },
+        {
+            "type": "image_picker",
+            "label": "Mobile image",
+            "id": "mobile_image",
+            "info": "Recommended size: 750 x 500px"
+        },
+        {
+            "type": "header",
+            "content": "Slider settings"
+        },
+        {
+            "type": "select",
+            "id": "slide_type",
+            "label": "Slider type",
+            "options": [
+                {
+                    "value": "loop",
+                    "label": "Loop"
+                },
+                {
+                    "value": "fade",
+                    "label": "Fade"
+                },
+                {
+                    "value": "slide",
+                    "label": "Slide"
+                }
+            ],
+            "default": "slide"
+        },
+        {
+            "type": "checkbox",
+            "label": "Display arrows",
+            "id": "display_arrows",
+            "default": true,
+            "info": "Arrows are hidden in mobile devices"
+        },
+        {
+            "type": "checkbox",
+            "label": "Display dots",
+            "id": "display_dots",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "label": "Autoplay slide",
+            "id": "autoplay_slide",
+            "default": false
+        },
+        {
+            "type": "range",
+            "label": "Autoplay duration",
+            "id": "autoplay_duration",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 3
+        },
+        {
+            "type": "color",
+            "label": "Background color",
+            "id": "background_color"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "hotspot",
+            "name": "Hotspot",
+            "settings": [
+                {
+                  "type": "text",
+                  "label": "Position from Top",
+                  "id": "position_from_top",
+                  "default": "50"
+                },
+                {
+                    
+                  "type": "text",
+                  "label": "Position from Left",
+                  "id": "position_from_left",
+                  "default": "50"
+                },
+                {
+                    "type": "product",
+                    "label": "Select product",
+                    "id": "product"
+                }
+                
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Default",
+            "category": "Custom"
+        }
+    ]
+}
+{% endschema %}

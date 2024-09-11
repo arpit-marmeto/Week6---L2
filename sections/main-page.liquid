@@ -1,0 +1,360 @@
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>IMAGE GALLERY</h1>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <input type="text" id="imageUrl" placeholder="Enter image URL">
+            <input type="text" id="imageName" placeholder="Enter image name">
+            <button id="addImageBtn">Add Image</button>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <input type="text" id="searchInput" placeholder="Search images...">
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery"></section>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div id="paginationControls" class="pagination-controls">
+        <button id="prevPage">Previous</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage">Next</button>
+    </div>
+
+
+<style>
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #dfdfdfb6;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #295F98;
+    
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-section input {
+    padding: 12px;
+    border: 1px solid #CDC2A5;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.input-section button {
+    padding: 12px;
+    border: 1px solid #CDC2A5;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #295F98;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-section button:hover {
+    background-color: #234a76;
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+.search-section input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #CDC2A5;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.gallery img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    margin: 5px;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+
+}
+
+@media (min-width: 768px) {
+    .input-section {
+        flex-direction: row;
+        margin-left: 25%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        margin-top: 50px;
+        padding: 40px;
+    }
+}
+
+#paginationControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:35px;
+}
+
+#paginationControls button {
+    padding: 10px 20px;
+    border: 1px solid #CDC2A5;
+    background-color: #EAE4DD;
+    color: #295F98;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin: 0 10px;
+}
+
+#paginationControls button:hover {
+    background-color: #295F98;
+    color: #fff;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.image-container img {
+    display: block;
+    width: 200px; /* Adjust as needed */
+    height: auto;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image-container:hover .delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+
+
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const selectors = {
+        addImageBtn: document.getElementById('addImageBtn'),
+        imageUrlInput: document.getElementById('imageUrl'),
+        imageNameInput: document.getElementById('imageName'),
+        searchInput: document.getElementById('searchInput'),
+        gallery: document.getElementById('gallery'),
+        prevPageBtn: document.getElementById('prevPage'),
+        nextPageBtn: document.getElementById('nextPage'),
+        pageInfo: document.getElementById('pageInfo'),
+    };
+
+    const config = {
+        itemsPerPage: 13,
+    };
+
+    let currentPage = 1;
+    let images = getImagesFromStorage();
+
+    // Event Listeners
+    function initEventListeners() {
+        selectors.addImageBtn.addEventListener('click', handleAddImage);
+        selectors.searchInput.addEventListener('input', displayImages);
+        selectors.prevPageBtn.addEventListener('click', handlePrevPage);
+        selectors.nextPageBtn.addEventListener('click', handleNextPage);
+    }
+
+    // Event Handlers
+    function handleAddImage() {
+        const imageUrl = selectors.imageUrlInput.value.trim();
+        const imageName = selectors.imageNameInput.value.trim().toLowerCase() || '';
+
+        if (isValidUrl(imageUrl)) {
+            addImage({ url: imageUrl, name: imageName });
+            resetInputFields();
+            displayImages();
+        } else {
+            alert('Please enter a valid image URL.');
+        }
+    }
+
+    function handlePrevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayImages();
+        }
+    }
+
+    function handleNextPage() {
+        if (currentPage * config.itemsPerPage < filteredImages().length) {
+            currentPage++;
+            displayImages();
+        }
+    }
+
+    // Core Functions
+    function addImage(image) {
+        images.unshift(image);
+        updateLocalStorage();
+        currentPage = 1;
+    }
+
+    function filteredImages() {
+        const searchTerm = selectors.searchInput.value.trim().toLowerCase();
+        return images.filter(img => 
+            img.name.includes(searchTerm) || img.url.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    function displayImages() {
+        const filtered = filteredImages();
+        clearGallery();
+
+        if (filtered.length === 0) {
+            displayEmptyMessage();
+        } else {
+            paginateAndDisplayImages(filtered);
+            updatePaginationInfo(filtered.length);
+        }
+    }
+
+    function paginateAndDisplayImages(filtered) {
+        const startIndex = (currentPage - 1) * config.itemsPerPage;
+        const paginatedImages = filtered.slice(startIndex, startIndex + config.itemsPerPage);
+
+        paginatedImages.forEach(img => {
+            createAndAppendImageElement(img);
+        });
+    }
+
+    function createAndAppendImageElement(img) {
+        const container = document.createElement('div');
+        container.classList.add('image-container');
+
+        const imgElement = document.createElement('img');
+        imgElement.src = img.url;
+        imgElement.alt = img.name || 'Unnamed Image';
+        container.appendChild(imgElement);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'X';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.addEventListener('click', () => handleDeleteImage(img));
+        container.appendChild(deleteBtn);
+
+        selectors.gallery.appendChild(container);
+    }
+
+    function handleDeleteImage(image) {
+        images.splice(images.indexOf(image), 1);
+        updateLocalStorage();
+        displayImages();
+    }
+
+    // Utility Functions
+    function isValidUrl(url) {
+        try {
+            new URL(url);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
+    function getImagesFromStorage() {
+        return JSON.parse(localStorage.getItem('images')) || [];
+    }
+
+    function updateLocalStorage() {
+        localStorage.setItem('images', JSON.stringify(images));
+    }
+
+    function clearGallery() {
+        selectors.gallery.innerHTML = '';
+    }
+
+    function displayEmptyMessage() {
+        const message = document.createElement('p');
+        message.textContent = 'The gallery is empty. Please add some images.';
+        selectors.gallery.appendChild(message);
+    }
+
+    function updatePaginationInfo(totalItems) {
+        selectors.pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(totalItems / config.itemsPerPage)}`;
+        selectors.prevPageBtn.disabled = currentPage === 1;
+        selectors.nextPageBtn.disabled = currentPage * config.itemsPerPage >= totalItems;
+    }
+
+    function resetInputFields() {
+        selectors.imageUrlInput.value = '';
+        selectors.imageNameInput.value = '';
+    }
+
+    // Initialize
+    function init() {
+        displayImages();
+        initEventListeners();
+    }
+
+    init();
+});
+
+
+</script>

@@ -1,0 +1,237 @@
+/* Mobile-first: default styles for mobile */
+.image-with-slider {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f8f8;
+    padding: 24px; /* Reduced padding for smaller screens */
+}
+
+.image-with-slider__container {
+    display: flex;
+    flex-direction: column; /* Stacks image and content in column */
+    width: 100%;
+    align-items: center;
+}
+
+.image-with-slider__image {
+    width: 100%;
+    margin-bottom: 20px; /* Added space between image and content */
+}
+
+.image-with-slider__image-img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+}
+
+.image-with-slider__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align text */
+}
+
+.image-with-slider__text {
+    margin-bottom: 20px;
+}
+
+.image-with-slider__heading {
+    font-size: 32px; /* Reduced font size for mobile */
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.image-with-slider__description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.image-with-slider__slider {
+    width: 100%;
+}
+
+.splide__slide {
+    width: 100%; /* Full width on mobile */
+}
+
+.image-with-slider__card {
+    width: 100%; /* Full width on mobile */
+    padding: 15px;
+    background-color: #f0f9e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Spacing between cards */
+}
+
+.image-with-slider__review {
+    font-style: italic;
+    color: #333;
+    text-align: center; /* Center-align review text on mobile */
+}
+
+.image-with-slider__client-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.image-with-slider__client-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.image-with-slider__client-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-with-slider__client-details {
+    font-size: 14px;
+    color: #333;
+    text-align: center; /* Center-align client details on mobile */
+}
+
+.image-with-slider__client-name {
+    font-weight: bold;
+}
+
+.image-with-slider__client-position {
+    color: #888;
+}
+
+/* Desktop: Adjust layout for larger screens */
+@media (min-width: 768px) {
+    .image-with-slider {
+        flex-direction: row; /* Flex-row on desktop */
+        padding: 36px;
+    }
+
+    .image-with-slider__container {
+        flex-direction: row; /* Side-by-side layout on desktop */
+        align-items: center;
+    }
+
+    .image-with-slider__image {
+        flex: 1;
+        margin-right: 20px;
+        margin-bottom: 0; /* Remove margin on desktop */
+    }
+
+    .image-with-slider__content {
+        flex: 1;
+        align-items: flex-start; /* Align content to the left */
+        text-align: left; /* Align text to the left */
+    }
+
+    .image-with-slider__review {
+        font-style: italic;
+        color: #333;
+        text-align: left; /* Center-align review text on mobile */
+    }
+
+    .image-with-slider__heading {
+        font-size: 56px; /* Larger font size on desktop */
+    }
+
+    .image-with-slider__slider {
+        width: 100%;
+    }
+
+    .splide__slide {
+        width: 50%; /* Two slides per row on desktop */
+    }
+
+    .image-with-slider__card {
+        width: 50%; /* Two cards per row */
+        margin: 0 10px; /* Adjust spacing between cards */
+    }
+
+    .image-with-slider__client-info {
+        justify-content: flex-start; /* Left-align client info */
+    }
+
+    .image-with-slider__review {
+        text-align: left; /* Left-align review text */
+    }
+
+    .image-with-slider__client-details {
+        text-align: left; /* Left-align client details */
+    }
+}
+
+
+/* 
+
+
+"blocks": [
+    {
+        "type": "testimonial",
+        "name": "Testimonial Card",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Card Details"
+            },
+            {
+                "type": "image_picker",
+                "id": "card_preview_image",
+                "label": "Card Preview Image"
+            },
+            {
+                "type": "richtext",
+                "id": "client_review",
+                "label": "Client Review Text",
+                "default": "<p></p>"
+            },
+            {
+                "type": "image_picker",
+                "id": "client_image",
+                "label": "Client Image"
+            },
+            {
+                "type": "text",
+                "id": "client_name",
+                "label": "Enter Client Name",
+                "default": "Mr. John Doe"
+            },
+            {
+                "type": "text",
+                "id": "client_position",
+                "label": "Enter Client Position",
+                "default": "Client"
+            }
+        ]
+    }
+], */
+/* 
+
+{% for block in section.blocks %}
+<li class="splide__slide image-with-slider__card">
+    <div class="image-with-slider__review">
+        <p>{{block.settings.client_review}}</p>
+    </div>
+    <div class="image-with-slider__client-info">
+        <div class="image-with-slider__client-image">
+            {%- if block.settings.client_image != blank -%}
+                {% render 'responsive-picture',
+                  desktopImage: block.settings.client_image,
+                  img-class: 'image-with-slider__client-image-img'
+                %}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+        </div>
+        <div class="image-with-slider__client-details">
+            <h3 class="image-with-slider__client-name">{{block.settings.client_name}}</h3>
+            <p class="image-with-slider__client-position">{{block.settings.client_position}}</p>
+        </div>
+    </div>
+</li>
+{% endfor %} */

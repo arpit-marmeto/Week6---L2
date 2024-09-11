@@ -1,0 +1,89 @@
+img.w-full {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.shop-the-look-container picture {
+    display: block;
+    line-height: 0;
+    height: 100%;
+}
+
+.shop-the-look-card__image-wrapper svg.placeholder-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.shop-the-look-card__image-wrapper.media.media--portrait.isolate {
+    position: relative;
+}
+
+.shop-the-look-card__image-wrapper.media .shop-the-look-card__hotspot {
+    display: block;
+    height: 3.2rem;
+    width: 3.2rem;
+    background: white;
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    transform: translate(-3.2rem, -3.2rem);
+}
+
+.shop-the-look-card__image-wrapper.media .shop-the-look-card__hotspot:after {
+    background: #161515;
+    content: "";
+    height: 0.4rem;
+    width: 0.4rem;
+    position: absolute;
+    top: calc(50% - 0.2rem);
+    left: calc(50% - 0.2rem);
+    border-radius: 50%;
+}
+
+/* Mini Product card css */
+
+.mini-product-card-wrapper {
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 1rem;
+    margin-left: 4rem;
+    visibility: hidden;
+    opacity: 0;
+    max-width: 18rem;
+}
+
+.shop-the-look-card__hotspot:hover .mini-product-card-wrapper {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mini-product-card-media {
+    width: 40%;
+}
+
+.mini-product-card__info {
+    font-size: 1rem;
+    color: black;
+    width: 60%;
+}
+
+.mini-product-card__info a {
+    line-height: normal;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

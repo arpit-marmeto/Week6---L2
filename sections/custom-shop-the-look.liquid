@@ -1,0 +1,237 @@
+{{ 'custom-shop-the-look.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'custom-shop-the-look.js' | asset_url }}" defer></script> 
+
+
+<div class="custom-shop-the-look-container page-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+    <h1 class="custom-shop-the-look-sectiontitle">{{section.settings.section_title}}</h1>
+    <div class="custom-shop-the-look-cardcontainer">
+    {% for block in section.blocks %}
+        {% if block.type == 'card' %}
+            <div class="custom-shop-the-look-card">
+                <div class="custom-shop-the-look-cardImg relative">
+                    {% render 'responsive-picture'
+                    desktopImage: block.settings.card_image,
+                    img-class: 'w-full'
+                     %}
+                    <!-- Add the hotspot dots inside the image container -->
+                    {% if block.settings.primary_dot %}
+                        <div class="hotspot primary" style="top: {{ block.settings.primary_dot_top_padding }}%; left: {{ block.settings.primary_dot_left_padding }}%;">
+                            <div class="hotspot-popup">
+                                 {{block.settings.primary_dot_product.title}}
+                                {% assign primary_product = block.settings.primary_dot_product %}
+                                {% if primary_product %}
+                                        <div class="hotspot-popup-image">
+                                        {% render 'responsive-picture'
+                                        desktopImage: primary_product.featured_image,
+                                        img-class: 'w-full'
+                                        %}
+                                        </div>
+                                    <div class="hotspot-popup-content">
+                                        <h4>{{ primary_product.title }}</h4>
+                                        <p class="{% if primary_product.compare_at_price %}if-compare-at-price{% endif %}">
+                                            {% if primary_product.compare_at_price %}
+                                                <span class="line-through">{{ primary_product.compare_at_price | money_with_currency }}</span>
+                                                {{ primary_product.price | money_with_currency }}
+                                            {% else %}
+                                                From {{ primary_product.price | money_with_currency }}
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if block.settings.secondary_dot %}
+                        <div class="hotspot secondary" style="top: {{ block.settings.secondary_dot_top_padding }}%; left: {{ block.settings.secondary_dot_left_padding }}%;">
+                            <div class="hotspot-popup">
+                                <!-- Fetch product details for secondary dot -->
+                                {% assign secondary_product = block.settings.secondary_dot_product %}
+                                {% if secondary_product %}
+                                    <div class="hotspot-popup-image">
+                                        {% render 'responsive-picture'
+                                        desktopImage: secondary_product.featured_image,
+                                        img-class: 'w-full'
+                                        %}
+                                        </div>
+                                    <h4>{{ secondary_product.title }}</h4>
+                                    <p class="{% if secondary_product.compare_at_price %}if-compare-at-price{% endif %}">
+                                        {% if secondary_product.compare_at_price %}
+                                            <span class="line-through">{{ secondary_product.compare_at_price | money_with_currency }}</span>
+                                            {{ secondary_product.price | money_with_currency }}
+                                        {% else %}
+                                            From {{ secondary_product.price | money_with_currency }}
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="custom-shop-the-look-card-content">
+                    <p class="custom-shop-the-look-card-heading">{{ block.settings.card_heading }}</p>
+                    <div class="custom-shop-the-look-card-description">
+                        {{ block.settings.card_description }}
+                    </div>
+                    {% if block.settings.first_card_button_label and block.settings.first_card_button_url %}
+                        <a href="{{ block.settings.first_card_button_url}}" class="custom-shop-the-look-card-button">
+                            {{ block.settings.first_card_button_label }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% schema %}
+{
+    "name": "custom shop the look",
+    "class": "section",
+    "tag": "section",        
+    "settings": [
+        {
+            "type": "richtext",
+            "label": "Section Title",
+            "id": "section_title"
+        },
+        {
+            "type": "header",
+            "content": "Section padding"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding top",
+            "default": 36
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding bottom",
+            "default": 36
+        }
+    ],
+    "blocks": [
+        {
+            "type": "card",
+            "name": "Card",
+            "limit": 3,
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Card Detail",
+                    "info": "Enter the card details"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "card_image",
+                    "label": "Card Image"
+                },
+                {
+                    "type": "richtext",
+                     "id": "card_heading",
+                    "label": "Heading",
+                    "default": "<p></p>"
+                },
+                {
+                    "type": "richtext",
+                    "id": "card_description",
+                    "label": "Description",
+                    "default": "<p></p>"
+                },
+                {
+                    "type": "text",
+                    "id": "first_card_button_label",
+                    "label": "Button Text"
+                },
+                {
+                    "type": "url",
+                    "id": "first_card_button_url",
+                    "label": "Button Link"
+                },
+                {
+                    "type": "header",
+                    "content": "Primary dot settings"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "primary_dot",
+                    "label": "Primary hotspot",
+                    "default": false
+                },
+                {
+                    "type": "product",
+                    "id": "primary_dot_product",
+                    "label": "Primary product"
+                },
+                {
+                    "type": "range",
+                    "id": "primary_dot_top_padding",
+                    "label": "Top Padding",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "primary_dot_left_padding",
+                    "label": "Left Padding",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 0
+                },
+                {
+                    "type": "checkbox",
+                    "id": "secondary_dot",
+                    "label": "Secondary hotspot",
+                    "default": false
+                },
+                {
+                    "type": "product",
+                    "id": "secondary_dot_product",
+                    "label": "Secondary product"
+                },
+                {
+                    "type": "range",
+                    "id": "secondary_dot_top_padding",
+                    "label": "Top Padding",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "secondary_dot_left_padding",
+                    "label": "Left Padding",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 0
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "custom shop the look"
+        }
+    ]
+}
+{% endschema %}

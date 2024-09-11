@@ -1,0 +1,32 @@
+
+.content-container {
+    border-radius: 8px;
+    border: 1px solid #FFFFFF54;
+    opacity: 0px;
+    background: #FFFFFF1F;
+   
+  }
+.banner__content{
+    margin-top: 50px;
+}
+
+.banner__heading {
+    font-family: "Poppins", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    padding-top:40px;
+}
+
+.banner__text p{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    color: #A8A8A8;
+    padding-top: 10px;
+}
+

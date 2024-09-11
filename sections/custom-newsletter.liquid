@@ -1,0 +1,144 @@
+<section class="newsletter-section" style="background-color: {{ section.settings.background_color }};">
+  <div class="newsletter-container">
+    <div>
+        <h2 class="newsletter-heading">{{ section.settings.newsletter_heading }}</h2>
+    </div>
+    <div>
+        <form method="post" action="{{ section.settings.form_action_url }}" class="newsletter-form">
+            <input type="email" name="email" placeholder="Email Address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-button">{{ section.settings.button_text }}</button>
+            </form>
+      </div>
+  </div>
+</section>
+
+<style>
+.newsletter-section {
+  padding: 40px;
+  text-align: center;
+}
+
+.newsletter-heading {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.newsletter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+}
+
+.newsletter-input {
+  padding: 15px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  width: 300px;
+  font-size: 1em;
+}
+
+.newsletter-button {
+  background-color: {{ section.settings.button_color }};
+  color: {{ section.settings.button_text_color }};
+  padding: 15px 30px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Responsive Styling */
+@media only screen and (max-width: 768px) {
+  .newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .newsletter-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-button {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .newsletter-heading {
+    font-size: 1.5em;
+  }
+
+  .newsletter-input,
+  .newsletter-button {
+    font-size: 0.9em;
+    padding: 10px;
+  
+}
+.newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+</style>
+
+
+{% schema %}
+    {
+      "name": "Newsletter Subscription",
+      "settings": [
+        {
+          "type": "text",
+          "id": "newsletter_heading",
+          "label": "Newsletter Heading",
+          "default": "Subscribe To Our Newsletter"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#efff82"
+        },
+        {
+          "type": "text",
+          "id": "form_action_url",
+          "label": "Form Action URL",
+          "default": "/contact"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Subscribe"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button Background Color",
+          "default": "#5d6b3e"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        }
+      ],
+      "presets": [
+        {
+          "name": "Newsletter Subscription"
+        }
+      ]
+    }
+    {% endschema %}
+    

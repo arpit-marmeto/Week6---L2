@@ -1,0 +1,341 @@
+{{ 'custom-footer.css' | asset_url | stylesheet_tag }}
+{% comment %} 
+
+<footer class="footer">
+  <div class="footer__container">
+    <!-- Products Section -->
+    <div class="footer__column footer__column--products">
+      <h3 class="footer__heading">{{ section.settings.products_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.products_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Shop Online Section -->
+    <div class="footer__column footer__column--shop">
+      <h3 class="footer__heading">{{ section.settings.shop_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.shop_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3 class="footer__heading">{{ section.settings.prescription_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.prescription_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3 class="footer__heading">{{ section.settings.store_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.store_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Ways to Save & Education Section -->
+    <div class="footer__column footer__column--save-education">
+      <h3 class="footer__heading">{{ section.settings.save_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.save_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3 class="footer__heading">{{ section.settings.education_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.education_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- About Us & Newsletter Section -->
+    <div class="footer__column footer__column--about-newsletter">
+      <h3 class="footer__heading">{{ section.settings.about_heading }}</h3>
+      <ul class="footer__list">
+        {% for link in section.settings.about_links %}
+        <li class="footer__list-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3 class="footer__heading">{{ section.settings.newsletter_heading }}</h3>
+      <p class="footer__text">{{ section.settings.newsletter_text }}</p>
+      <div class="footer__newsletter">
+        <input type="email" placeholder="{{ section.settings.email_placeholder }}" class="footer__input">
+        <button class="footer__button">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <ul class="footer__links">
+      {% for link in section.settings.footer_links %}
+      <li class="footer__links-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="footer__bottom">
+    <p class="footer__copyright">{{ section.settings.copyright_text }}</p>
+    <ul class="footer__legal">
+      {% for link in section.settings.legal_links %}
+      <li class="footer__legal-item"><a href="{{ link.url }}" class="footer__link">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+    <div class="footer__social">
+      {% for link in section.settings.social_links %}
+      <a href="{{ link.url }}" class="footer__social-link"><i class="fa {{ link.icon }}"></i></a>
+      {% endfor %}
+    </div>
+  </div>
+</footer> {% endcomment %}
+
+
+
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Products Section -->
+    <div class="footer-column">
+      <h3>PRODUCTS</h3>
+      <ul>
+        <li><a href="#">Eyeglasses</a></li>
+        <li><a href="#">Sunglasses</a></li>
+        <li><a href="#">Contacts</a></li>
+        <li><a href="#">New Collections</a></li>
+        <li><a href="#">Accessories</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    
+    <!-- Shop Online Section -->
+    <div class="footer-column">
+      <h3>SHOP ONLINE</h3>
+      <ul>
+        <li><a href="#">Try 5 For Free</a></li>
+        <li><a href="#">Download Our App</a></li>
+      </ul>
+
+      <h3>GET A PRESCRIPTION</h3>
+      <ul>
+        <li><a href="#">Book An Eye Exam</a></li>
+        <li><a href="#">Renew A Prescription</a></li>
+        <li><a href="#">Measure Your PD</a></li>
+      </ul>
+
+      <h3>VISIT A STORE</h3>
+      <ul>
+        <li><a href="#">Find Location</a></li>
+      </ul>
+    </div>
+    
+    <!-- Ways to Save & Education Section -->
+    <div class="footer-column">
+      <h3>WAYS TO SAVE</h3>
+      <ul>
+        <li><a href="#">Insurance</a></li>
+        <li><a href="#">Flexible Spending</a></li>
+        <li><a href="#">20% Off Contacts</a></li>
+        <li><a href="#">Add A Pair And Save</a></li>
+      </ul>
+
+      <h3>EDUCATION</h3>
+      <ul>
+        <li><a href="#">Eyeglass Lens Guide</a></li>
+        <li><a href="#">Sunglass Lens Guide</a></li>
+        <li><a href="#">Eyewear A to Z</a></li>
+        <li><a href="#">How Our Glasses Are Made</a></li>
+      </ul>
+    </div>
+    
+    <!-- About Us & Newsletter Section -->
+    <div class="footer-column">
+      <h3>ABOUT US</h3>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Buy A Pair, Give A Pair</a></li>
+        <li><a href="#">Customer Reviews</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Impact And Equity</a></li>
+        <li><a href="#">Impact Foundation</a></li>
+        <li><a href="#">Investors</a></li>
+      </ul>
+      
+  </div>
+  <div class="footer-column">
+      <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
+      <p>Sign Up For Exclusive Updates, New Arrivals & Insider Only Discounts</p>
+      <div class="newsletter">
+        <input type="email" placeholder="Enter email ID">
+        <button>➤</button>
+      </div>
+  </div>
+</div>
+
+<div>
+  <ul class="footer-links">
+    <li><a href="#">insurance</a></li>
+    <li><a href="#">Goggles</a></li>
+    <li><a href="#">Blue cut lens</a></li>
+    <li><a href="#">Goggles for Men</a></li>
+    <li><a href="#">Mirrored Sunglasses</a></li>
+    <li><a href="#">Glasses for Men</a></li>
+    <li><a href="#">Transparent Glasses</a></li>
+    <li><a href="#">Goggles for Women</a></li>
+  </ul>
+</div>
+  <div class="footer-bottom">
+    <p>Copyright © 2021 GKB Eyewear Pvt Ltd. All rights reserved</p>
+    <ul class="footer-legal">
+      <li><a href="#">Terms & conditions</a></li>
+      <li><a href="#">FAQs</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <div class="footer-social">
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-instagram"></i></a>
+      <a href="#"><i class="fa fa-youtube"></i></a>
+      <a href="#"><i class="fa fa-whatsapp"></i></a>
+    </div>
+  </div>
+</footer>
+
+
+
+{% schema %}
+    {
+  "name": "Custom Footer",
+  "tag": "footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "products_heading",
+      "label": "Products Heading",
+      "default": "PRODUCTS"
+    },
+    {
+      "type": "link_list",
+      "id": "products_links",
+      "label": "Products Links"
+    },
+    {
+      "type": "text",
+      "id": "shop_heading",
+      "label": "Shop Online Heading",
+      "default": "SHOP ONLINE"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_links",
+      "label": "Shop Links"
+    },
+    {
+      "type": "text",
+      "id": "prescription_heading",
+      "label": "Prescription Heading",
+      "default": "GET A PRESCRIPTION"
+    },
+    {
+      "type": "link_list",
+      "id": "prescription_links",
+      "label": "Prescription Links"
+    },
+    {
+      "type": "text",
+      "id": "store_heading",
+      "label": "Visit a Store Heading",
+      "default": "VISIT A STORE"
+    },
+    {
+      "type": "link_list",
+      "id": "store_links",
+      "label": "Store Links"
+    },
+    {
+      "type": "text",
+      "id": "save_heading",
+      "label": "Ways to Save Heading",
+      "default": "WAYS TO SAVE"
+    },
+    {
+      "type": "link_list",
+      "id": "save_links",
+      "label": "Ways to Save Links"
+    },
+    {
+      "type": "text",
+      "id": "education_heading",
+      "label": "Education Heading",
+      "default": "EDUCATION"
+    },
+    {
+      "type": "link_list",
+      "id": "education_links",
+      "label": "Education Links"
+    },
+    {
+      "type": "text",
+      "id": "about_heading",
+      "label": "About Us Heading",
+      "default": "ABOUT US"
+    },
+    {
+      "type": "link_list",
+      "id": "about_links",
+      "label": "About Links"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "SUBSCRIBE TO OUR NEWSLETTER"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter Text",
+      "default": "Sign Up For Exclusive Updates, New Arrivals & Insider Only Discounts"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Input Placeholder",
+      "default": "Enter email ID"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_links",
+      "label": "Footer Links"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "Copyright © 2021 GKB Eyewear Pvt Ltd. All rights reserved"
+    },
+    {
+      "type": "link_list",
+      "id": "legal_links",
+      "label": "Legal Links"
+    },
+    {
+      "type": "link_list",
+      "id": "social_links",
+      "label": "Social Links"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Custom Footer"
+    }
+  ]
+}
+
+{% endschema %}
+

@@ -1,0 +1,103 @@
+.custom-shop-the-look-sectiontitle{
+    text-align: center;
+}
+
+.custom-shop-the-look-card-button{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #000000; /* Adjust button color as needed */
+    border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Container for the cards */
+.custom-shop-the-look-cardcontainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on desktop */
+    gap: 20px; /* Space between cards */
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .custom-shop-the-look-cardcontainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 5px;
+    }
+}
+
+/* Card styling */
+.custom-shop-the-look-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-shop-the-look-cardImg{
+    width: 350px; 
+    height: 450px; 
+    overflow: hidden; 
+    border-radius: 20px;
+    position: relative;
+}
+
+.custom-shop-the-look-cardImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hotspot styling */
+.hotspot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* Primary hotspot color */
+.hotspot.primary {
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+/* Secondary hotspot color */
+.hotspot.secondary {
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+/* Popup styling */
+.hotspot-popup {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    top: -70px; /* Adjust to position the popup */
+    left: 30px; /* Adjust to position the popup */
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Show popup on hover */
+.hotspot:hover .hotspot-popup {
+    display: block;
+    width: 150px; /* Adjust popup width */
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+@media screen and (min-width: 750px) {
+    .page-width {
+        padding: 0 2rem;
+    }
+}

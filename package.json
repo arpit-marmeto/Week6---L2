@@ -1,0 +1,16 @@
+{
+  "name": "asa_yourspex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "shopify theme dev -s b05-arpit.myshopify.com",
+    "dev-sync": "shopify theme dev --theme-editor-sync -s b05-arpit.myshopify.com",
+    "pull": "shopify theme pull -s b05-arpit.myshopify.com",
+    "push": "shopify theme push -s b05-arpit.myshopify.com",
+    "pull-json": "shopify theme pull -d -o *.json -s b05-arpit.myshopify.com",
+    "share": "shopify theme share -s b05-arpit.myshopify.com"
+  },
+  "author": "",
+  "license": "ISC"
+}

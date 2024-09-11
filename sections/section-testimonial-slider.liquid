@@ -1,0 +1,196 @@
+{{ 'section-testimonial-slider.css' | asset_url | stylesheet_tag }}
+
+
+{% capture slider_options %}
+  {
+      "type": "{{ section.settings.slider_type }}",
+      "perPage": {{ section.settings.per_page }},
+      "pagination": {{section.settings.pagination}},
+      "arrows": {{section.settings.navigation_arrows}}
+  }
+{% endcapture %}
+
+
+{% comment %} <custom-slider-component class="splide" data-options='{{ slider_options }}'>
+  <div class="splide__track">
+    <ul class="splide__list">
+      {% for block in section.blocks %}
+        <li class="splide__slide testimonial-card">
+          <div class="testimonial-image">
+            {% if block.settings.testimonial_card_image != blank %}
+              {% render 'responsive-picture', 
+                desktopImage: block.settings.testimonial_card_image, 
+                img-class: w-full h-auto' 
+              %}
+              {%- else -%}
+              {{ "product-1" | placeholder_svg_tag }}
+            {%- endif %}
+          </div>
+          <div class="testimonial-content">
+            <h3>{{ block.settings.client_name }}</h3>
+            <p>{{ block.settings.testimonial_text }}</p>
+            <div class="star-rating">
+              {% for i in (1..block.settings.star_rating) %}
+                <span class="star">★</span>
+              {% endfor %}
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</custom-slider-component> {% endcomment %}
+
+
+<script>
+  function changeBackground(selectedTestimonial) {
+    document.querySelectorAll('.testimonial').forEach(function(testimonial) {
+      testimonial.classList.remove('active');
+      testimonial.style.backgroundColor = '#F9F9F9'; 
+    });
+
+    selectedTestimonial.classList.add('active');
+    var newBackgroundColor = selectedTestimonial.getAttribute('data-background-color');
+    selectedTestimonial.style.backgroundColor = newBackgroundColor;
+  }
+</script>
+
+<div class="testimonial-section">
+    <h2>{{ section.settings.section_title }}</h2>
+    <div class="testimonial-wrapper">
+<custom-slider-component class="splide" data-options='{{ slider_options }}'>
+    
+    <div class="splide__track">
+          <ul class="splide__list">
+            {% for block in section.blocks %}
+              {% comment %} <li class="splide__slide">Custom Slide {{ forloop.index0 }}</li>  {% endcomment %}
+
+              <div class="splide__slide testimonial" data-background-color="{{ block.settings.background_color }}" onclick="changeBackground(this)">
+                <div class="testimonial-image">
+                  <img src="{{ block.settings.customer_image | img_url: 'medium' }}" alt="{{ block.settings.customer_name }}" width="100%" height="auto">
+                </div>
+                <h3>{{ block.settings.customer_name }}</h3>
+                <p>{{ block.settings.testimonial_text }}</p>
+                <div class="stars">
+                  {% for i in (1..block.settings.star_rating) %}
+                    <span class="star">★</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </ul>
+     
+   
+    </div>
+    
+</custom-slider-component>
+</div>
+</div> 
+
+
+
+
+{% schema %}
+  {
+    "name": "Customer Testimonials",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title",
+        "default": "Our Customer Says"
+      },
+      {
+        "type": "header",
+        "content": "Slider options",
+      },
+      {
+        "type": "select",
+        "id": "slider_type",
+        "label": "Slider type",
+        "options": [
+            {
+            "value": "loop",
+            "label": "Loop"
+            },
+            {
+            "value": "slide",
+            "label": "Slide"
+            },
+            {
+            "value": "fade",
+            "label": "Fade"
+            }
+        ],
+        "default": "slide",
+      },
+      {
+        "type": "range",
+        "id": "per_page",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "label": "Per Page",
+        "default": 3
+      },
+      {
+        "type": "checkbox",
+        "id": "pagination",
+        "label": "Pagination",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "navigation_arrows",
+        "label": "Navigation arrows",
+        "default": true
+      },
+    ],
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "customer_image",
+            "label": "Customer Image"
+          },
+          {
+            "type": "text",
+            "id": "customer_name",
+            "label": "Customer Name",
+            "default": "Arun Dpak"
+          },
+          {
+            "type": "textarea",
+            "id": "testimonial_text",
+            "label": "Testimonial Text",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit u. Curabitur pellentesque."
+          },
+          {
+            "type": "range",
+            "id": "star_rating",
+            "label": "Star Rating",
+            "min": 1,
+            "max": 5,
+            "default": 5
+          },
+          {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#E0E0E0"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials Slider"
+      }
+    ]
+  }
+  {% endschema %}
+
+

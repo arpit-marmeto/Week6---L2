@@ -1,0 +1,68 @@
+{{ 'section_brand_usp.css' | asset_url | stylesheet_tag }}
+
+<section class="brand-usp">
+  {% for block in section.blocks %}
+    <div class="brand-usp__item">
+      <div class="brand-usp__logo">
+        {% if block.settings.usp_card_logo != blank %}
+            {% render 'responsive-picture', 
+            desktopImage: block.settings.usp_card_logo, 
+            img-class: 'w-full h-auto' 
+          %}
+        {% else %}
+        {{ "product-1" | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      <div class="brand-usp__content">
+        <h1 class="brand-usp__heading">{{ block.settings.usp_card_heading }}</h1>
+        <p class="brand-usp__description">{{ block.settings.usp_card_description }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Brand Usp",
+  "class": "brand-usp",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand USP",
+      "info": "Enter Your Brand USP Details"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand_usp_card",
+      "name": "Brand USP Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "usp_card_logo",
+          "label": "USP Card Logo"
+        },
+        {
+          "type": "text",
+          "id": "usp_card_heading",
+          "label": "USP Card Heading",
+          "default": "Quality"
+        },
+        {
+          "type": "text",
+          "id": "usp_card_description",
+          "label": "USP Card Description",
+          "default": "Unmatched Craftsmanship"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand USP",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
