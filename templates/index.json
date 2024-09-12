@@ -85,7 +85,7 @@
         "image_with_slider_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "slide_type": "slide",
         "per_page": 2,
-        "display_arrows": true,
+        "display_arrows": false,
         "display_dots": true,
         "autoplay_slide": false,
         "autoplay_duration": 3,
