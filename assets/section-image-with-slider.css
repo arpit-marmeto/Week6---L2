@@ -138,6 +138,18 @@
     display: none;
 }
 
+.zero-opacity {
+    display: none;
+    transform: scale(1.02);
+    filter: blur(3px);
+  }
+  .full-opacity {
+    display: block;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+
+
 
 @media (min-width: 768px) {
     .image-with-slider {

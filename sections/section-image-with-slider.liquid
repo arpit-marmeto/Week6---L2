@@ -1,215 +1,248 @@
 {{ 'section-image-with-slider.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'section-image-with-slider.js' | asset_url }}" defer></script> 
 
+{% capture slider_options %}
+{
+    "type": "{{ section.settings.slide_type }}",
+    "perPage": {{ section.settings.per_page }},
+    "pagination": {{ section.settings.display_dots }},
+    "arrows": {{ section.settings.display_arrows }},
+    "autoplay": {{ section.settings.autoplay_slide }},
+    "interval": {{ section.settings.autoplay_duration }}000
+}
+{% endcapture %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const images = Array.from(document.querySelectorAll('.image-with-slider__image-img'));
+  const splide = new Splide('.image-with-slider__slider', {{ slider_options | json }});
+
+  splide.on('move', (newIndex) => {
+    images.forEach((image, index) => {
+      if (newIndex === index) {
+        image.classList.remove('zero-opacity');
+        image.classList.add('full-opacity');
+      } else {
+        image.classList.remove('full-opacity');
+        image.classList.add('zero-opacity');
+      }
+    });
+  });
+
+  splide.mount();
+});
+</script>
 
 <section class="image-with-slider">
-    <div class="image-with-slider__container">
-        <div class="image-with-slider__image">
-            {%- if section.settings.card_preview_image != blank -%}
-                {% render 'responsive-picture',
-                  desktopImage: section.settings.card_preview_image,
-                  img-class: 'image-with-slider__image-img'
-                %}
-              {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag }}
-              {%- endif -%}
-        </div>
-        <div class="image-with-slider__content">
-            <div class="image-with-slider__text">
-                <h2 class="image-with-slider__heading">{{section.settings.image_with_slider_heading}}</h2>
-                <p class="image-with-slider__description">{{section.settings.image_with_slider_description}}</p>
-            </div>
-            <custom-slider-component class="splide image-with-slider__slider" >
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        {% for block in section.blocks %}
-                            <li class="splide__slide image-with-slider__card">
-                                <div class="image-with-slider__review">
-                                    <p>{{block.settings.client_review}}</p>
-                                </div>
-                                <div class="image-with-slider__client-info">
-                                    <div class="image-with-slider__client-image">
-                                        {%- if block.settings.client_image != blank -%}
-                                            {% render 'responsive-picture',
-                                              desktopImage: block.settings.client_image,
-                                              img-class: 'image-with-slider__client-image-img'
-                                            %}
-                                          {%- else -%}
-                                            {{ 'product-1' | placeholder_svg_tag }}
-                                          {%- endif -%}
-                                    </div>
-                                    <div class="image-with-slider__client-details">
-                                        <h3 class="image-with-slider__client-name">{{block.settings.client_name}}</h3>
-                                        <p class="image-with-slider__client-position">{{block.settings.client_position}}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </custom-slider-component>
-        </div>
+  <div class="image-with-slider__container">
+    <div class="image-with-slider__image">
+      {% for block in section.blocks %}
+        {%- if block.settings.card_preview_image != blank -%}
+          {% render 'responsive-picture',
+            desktopImage: block.settings.card_preview_image,
+            img-class: 'image-with-slider__image-img zero-opacity'
+          %}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag }}
+        {%- endif -%}
+      {% endfor %}
     </div>
+
+    <div class="image-with-slider__content">
+      <div class="image-with-slider__text">
+        <h2 class="image-with-slider__heading">{{ section.settings.image_with_slider_heading }}</h2>
+        <p class="image-with-slider__description">{{ section.settings.image_with_slider_description }}</p>
+      </div>
+
+      <custom-slider-component class="splide image-with-slider__slider" data-options='{{ slider_options }}'>
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for block in section.blocks %}
+              <li class="splide__slide image-with-slider__card">
+                <div class="image-with-slider__review">
+                  <p>{{ block.settings.client_review }}</p>
+                </div>
+                <div class="image-with-slider__client-info">
+                  <div class="image-with-slider__client-image">
+                    {%- if block.settings.client_image != blank -%}
+                      {% render 'responsive-picture',
+                        desktopImage: block.settings.client_image,
+                        img-class: 'image-with-slider__client-image-img'
+                      %}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag }}
+                    {%- endif -%}
+                  </div>
+                  <div class="image-with-slider__client-details">
+                    <h3 class="image-with-slider__client-name">{{ block.settings.client_name }}</h3>
+                    <p class="image-with-slider__client-position">{{ block.settings.client_position }}</p>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </custom-slider-component>
+    </div>
+  </div>
 </section>
 
 {% schema %}
+{
+  "name": "Image With Slider",
+  "class": "image-with-slider",
+  "tag": "section",
+  "settings": [
     {
-        "name": "Image With Slider",
-        "class": "image-with-slider",
-        "tag": "section",
-        "settings": [
-            {
-                "type": "image_picker",
-                "id": "card_preview_image",
-                "label": "Card Preview Image"
-            },
-            {
-                "type": "text",
-                "id": "image_with_slider_heading",
-                "label": "Enter Heading",
-                "default": "Testimonials"
-            },
-            {
-                "type": "textarea",
-                "id": "image_with_slider_description",
-                "label": "Enter Description",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            },
-            {
-                "type": "header",
-                "content": "Slider settings"
-            },
-            {
-                "type": "select",
-                "id": "slide_type",
-                "label": "Slider type",
-                "options": [
-                    {
-                        "value": "loop",
-                        "label": "Loop"
-                    },
-                    {
-                        "value": "fade",
-                        "label": "Fade"
-                    },
-                    {
-                        "value": "slide",
-                        "label": "Slide"
-                    }
-                ],
-                "default": "slide"
-            },
-            {
-        "type": "range",
-        "id": "per_page",
-        "min": 1,
-        "max": 6,
-        "step": 1,
-        "label": "Per Page",
-        "default": 3
-         },
-            {
-                "type": "checkbox",
-                "label": "Display arrows",
-                "id": "display_arrows",
-                "default": true,
-                "info": "Arrows are hidden in mobile devices"
-            },
-            {
-                "type": "checkbox",
-                "label": "Display dots",
-                "id": "display_dots",
-                "default": false
-            },
-            {
-                "type": "checkbox",
-                "label": "Autoplay slide",
-                "id": "autoplay_slide",
-                "default": false
-            },
-            {
-                "type": "range",
-                "label": "Autoplay duration",
-                "id": "autoplay_duration",
-                "min": 1,
-                "max": 10,
-                "step": 1,
-                "default": 3
-            },
-            {
-                "type": "header",
-                "content": "Section styling"
-            },
-            {
-                "type": "color",
-                "label": "Background color",
-                "id": "background_color"
-            },
-            {
-                "type": "header",
-                "content": "Padding"
-            },
-            {
-                "type": "range",
-                "id": "padding_top",
-                "min": 0,
-                "max": 100,
-                "step": 4,
-                "unit": "px",
-                "label": "Padding Top",
-                "default": 36
-            },
-            {
-                "type": "range",
-                "id": "padding_bottom",
-                "min": 0,
-                "max": 100,
-                "step": 4,
-                "unit": "px",
-                "label": "Padding Bottom",
-                "default": 36
-            }
-        ],
-        "blocks": [
-            {
-                "type": "testimonial",
-                "name": "Testimonial Card",
-                "settings": [
-
-                    {
-                        "type": "header",
-                        "content": "Card Details"
-                    },
-                    {
-                        "type": "richtext",
-                        "id": "client_review",
-                        "label": "Client Review Text",
-                        "default": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “</p>"
-                    },
-                    {
-                        "type": "image_picker",
-                        "id": "client_image",
-                        "label": "Client Image"
-                    },
-                    {
-                        "type": "text",
-                        "id": "client_name",
-                        "label": "Enter Client Name",
-                        "default": "Mr. John Doe"
-                    },
-                    {
-                        "type": "text",
-                        "id": "client_position",
-                        "label": "Enter Client Position",
-                        "default": "Client"
-                    }
-                ]
-            }
-        ],
-        "presets": [
-      {
-        "name": "Image With Testimonial Slider"
-      }
-    ]
+      "type": "text",
+      "id": "image_with_slider_heading",
+      "label": "Enter Heading",
+      "default": "Testimonials"
+    },
+    {
+      "type": "textarea",
+      "id": "image_with_slider_description",
+      "label": "Enter Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "type": "header",
+      "content": "Slider settings"
+    },
+    {
+      "type": "select",
+      "id": "slide_type",
+      "label": "Slider type",
+      "options": [
+        {
+          "value": "loop",
+          "label": "Loop"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        },
+        {
+          "value": "slide",
+          "label": "Slide"
+        }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Per Page",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "label": "Display arrows",
+      "id": "display_arrows",
+      "default": true,
+      "info": "Arrows are hidden in mobile devices"
+    },
+    {
+      "type": "checkbox",
+      "label": "Display dots",
+      "id": "display_dots",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "label": "Autoplay slide",
+      "id": "autoplay_slide",
+      "default": false
+    },
+    {
+      "type": "range",
+      "label": "Autoplay duration",
+      "id": "autoplay_duration",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Section styling"
+    },
+    {
+      "type": "color",
+      "label": "Background color",
+      "id": "background_color"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
     }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Card Details"
+        },
+        {
+          "type": "richtext",
+          "id": "client_review",
+          "label": "Client Review Text",
+          "default": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "client_image",
+          "label": "Client Image"
+        },
+        {
+          "type": "text",
+          "id": "client_name",
+          "label": "Enter Client Name",
+          "default": "Mr. John Doe"
+        },
+        {
+          "type": "text",
+          "id": "client_position",
+          "label": "Enter Client Position",
+          "default": "Client"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_preview_image",
+          "label": "Card Preview Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image With Testimonial Slider"
+    }
+  ]
+}
 {% endschema %}
