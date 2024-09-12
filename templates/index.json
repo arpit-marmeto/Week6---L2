@@ -86,7 +86,7 @@
         "slide_type": "slide",
         "per_page": 2,
         "display_arrows": false,
-        "display_dots": true,
+        "display_dots": false,
         "autoplay_slide": false,
         "autoplay_duration": 3,
         "background_color": "",
