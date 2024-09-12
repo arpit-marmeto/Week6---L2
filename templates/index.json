@@ -50,7 +50,8 @@
             "client_review": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “<\/p>",
             "client_image": "shopify:\/\/shop_images\/Rectangle_8.png",
             "client_name": "Mr. John Doe",
-            "client_position": "Client"
+            "client_position": "Client",
+            "card_preview_image": "shopify:\/\/shop_images\/Rectangle_14.png"
           }
         },
         "testimonial_dpaDjR": {
@@ -59,7 +60,8 @@
             "client_review": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “<\/p>",
             "client_image": "shopify:\/\/shop_images\/Aryendra_Prakash_Singh.jpg",
             "client_name": "Mr. John Doe",
-            "client_position": "Client"
+            "client_position": "Client",
+            "card_preview_image": "shopify:\/\/shop_images\/m-fz-fold-blk-1-fz-craft-original-imaguyg4dcnvw3zg.jpg"
           }
         },
         "testimonial_cBVpeY": {
@@ -68,7 +70,8 @@
             "client_review": "<p>“ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque  “<\/p>",
             "client_image": "shopify:\/\/shop_images\/1_86583ec4-835c-45cd-999c-b7e8b1bdc86e.webp",
             "client_name": "Mr. John Doe",
-            "client_position": "Client"
+            "client_position": "Client",
+            "card_preview_image": "shopify:\/\/shop_images\/blue-block-phone-_-computer-glasses_-blue-full-rim-square-lenskart-blu-lb-e13526-c4_vincent-chase-vc-e13526-c4-eyeglasses_g_843522_02_2022.jpg"
           }
         }
       },
@@ -78,13 +81,12 @@
         "testimonial_cBVpeY"
       ],
       "settings": {
-        "card_preview_image": "shopify:\/\/shop_images\/Rectangle_14.png",
         "image_with_slider_heading": "Testimonials",
         "image_with_slider_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "slide_type": "slide",
-        "per_page": 3,
+        "per_page": 2,
         "display_arrows": true,
-        "display_dots": false,
+        "display_dots": true,
         "autoplay_slide": false,
         "autoplay_duration": 3,
         "background_color": "",
