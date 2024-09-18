@@ -87,7 +87,7 @@
         "per_page": 2,
         "display_arrows": false,
         "display_dots": false,
-        "autoplay_slide": false,
+        "autoplay_slide": true,
         "autoplay_duration": 3,
         "background_color": "",
         "padding_top": 36,
